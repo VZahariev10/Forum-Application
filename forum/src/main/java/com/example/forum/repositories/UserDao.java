@@ -4,10 +4,14 @@ import com.example.forum.model.User;
 
 import java.util.List;
 
-public interface UserDao  {
+public interface UserDao {
     void createUser(User user);
+
     List<User> getAllUser();
+
     User getUserById(int id);
-    void updateUserById(int id);
+
+    void updateUserById(int id, User userche);
+
     void deleteUserById(int id);
 }

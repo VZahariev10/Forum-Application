@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserRepository implements UserDao{
+public class UserRepository implements UserDao {
     private List<User> users = new ArrayList<>();
 
-    public UserRepository(){
+    public UserRepository() {
         users.add(new User(1, "Petyr", "123", "pepi@yahoo.com", true));
         users.add(new User(2, "Ani", "456", "ani@yahoo.com", true));
         users.add(new User(3, "Asen", "789", "asen@yahoo.com", true));
@@ -21,7 +21,7 @@ public class UserRepository implements UserDao{
 
     @Override
     public void createUser(User user) {
-        this.users.add(new User(this.users.size()+1,
+        this.users.add(new User(this.users.size() + 1,
                 user.getUsername(),
                 user.getPassword(),
                 user.getEmail(),
@@ -37,16 +37,24 @@ public class UserRepository implements UserDao{
     public User getUserById(int id) {
         User userToReturn = null;
         for (User user : users) {
-            if(user.getId() == id){
-                userToReturn=user;
+            if (user.getId() == id) {
+                userToReturn = user;
             }
         }
         return userToReturn;
     }
 
     @Override
-    public void updateUserById(int id) {
-
+    public void updateUserById(int id, User userToUpdate) {
+        userToUpdate.setId(id);
+        for (User user : users) {
+            if (user.getId() == userToUpdate.getId()) {
+                user.setUsername(userToUpdate.getUsername());
+                user.setEmail(userToUpdate.getEmail());
+                user.setPassword(userToUpdate.getPassword());
+                user.setEnabled(userToUpdate.isEnabled());
+            }
+        }
     }
 
     @Override

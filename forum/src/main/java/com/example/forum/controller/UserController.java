@@ -15,20 +15,30 @@ public class UserController {
     public UserController(UserDao userDao) {
         this.userDao = userDao;
     }
+
     @PostMapping("/users")
-    public void createUser(@RequestBody User user){
+    public void createUser(@RequestBody User user) {
         this.userDao.createUser(user);
     }
+
     @GetMapping("/users/getAll")
-        public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userDao.getAllUser();
     }
+
     @GetMapping("/users/getUserByID/{id}")
-    public User getUserBydID(@PathVariable int id){
+    public User getUserBydID(@PathVariable int id) {
         return userDao.getUserById(id);
     }
+
     @DeleteMapping("/users/deleteUserByID/{id}")
-        public void deleteUserByID(@PathVariable int id){
+    public void deleteUserByID(@PathVariable int id) {
         userDao.deleteUserById(id);
+    }
+
+    @PutMapping("/users/updateUserByID/{id}")
+    public void updatePersonByID(@PathVariable int id, @RequestBody User user) {
+
+        userDao.updateUserById(id, user);
     }
 }
